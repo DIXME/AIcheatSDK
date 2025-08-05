@@ -39,7 +39,16 @@ int delay_max = 100;
 // state management
 
 Mode state = Mode::kmbox;
-bool connected = false;
+Kmbox kmboxAPI;
+
+bool connect(){
+   switch (state)
+   {
+      case Mode::kmbox:
+         kmboxAPI.connect(kmboxIpBuffer,kmboxPortBuffer,kmboxMacBuffer);
+      break;
+   }
+};
 
 void initBuffers(){
    kmboxIpBuffer  [63]='\0';
@@ -142,5 +151,5 @@ void init(){
    ImGui_ImplGlfw_InitForOpenGL(window,true);
    ImGui_ImplOpenGL3_Init();
 
-   myFont = io.Fonts->AddFontFromFileTTF("/home/dom/.local/share/fonts/JetBrainsMonoNerdFontMono-Regular.ttf", 18.0f);
+   myFont = io.Fonts->AddFontFromFileTTF("./JetBrainsMonoNerdFontMono-Regular.ttf", 18.0f);
 }

@@ -3,20 +3,11 @@
 #include <memory>
 #include <string>
 
-typedef struct {
-   virtual void move(int x, int y, int ms = 0){};
-   virtual void keyDown(int key){};
-   virtual void keyUp(int key){};
-   virtual void key(int key){};
-} MouseAPI_t;
-
 enum Mode {
    native,
    kmbox,
    macku
 };
-
-typedef std::unique_ptr<MouseAPI_t>& MouseAPI;
 
 // make native, kmbox, and macku api's
 
@@ -28,7 +19,7 @@ typedef struct {
 typedef std::vector<Point> Points; 
 
 // recreate a recoil pattern (Image => Points)
-void copyPattern(Points points, MouseAPI api){}
+void copyPattern(Points points){}
 
 typedef struct {
    int x_mv;

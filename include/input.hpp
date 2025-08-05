@@ -1,30 +1,32 @@
 #include <kmbox/kmboxNet.h>
-namespace Kmbox {
+#include <types.hpp>
+#include <string>
+
+class Kmbox {
+   // you can make your own aswell!
+public:
+   bool connected;
+   void move(int x, int y, int ms){
+      if(this->connected){
+         kmNet_mouse_move_auto(x,y,ms);
+      };
+   };
+
+   void move(short x, short y){
+      if(this->connected){
+         kmNet_mouse_move(x,y);
+      };
+   };
+
    bool connect(char* ip, char* port, char* mac){
-      return kmNet_init(ip,port,mac);
-   }
+      bool result = kmNet_init(ip,port,mac)==0;
+      this->connected = result;
+      return result;
+   };
 
-   bool test(){
-      return kmNet_mouse_move(500,500);
-   }
-}
-
-namespace Macku {
-   bool connect(){
-      return false;
-   }
-
-   bool test(){
-      return false;
-   }
-}
-
-namespace Native {
-   bool connect(){
-      return false;
-   }
-
-   bool test(){
-      return false;
-   }
-}
+   void test(){
+      if(this->connected){
+         this->move(500,500);
+      };
+   };
+};
